@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="风在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://lg-7xfeyoec-1257141558.cos.ap-shanghai.myqcloud.com/images/photo.jpg">
+    <link rel="alternate" type="application/atom+xml" title="风" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>    
+          
+    <title>
+        
+        js｜前端
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2019/02/04/js/">    
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">    
+
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>  
+
+</head>
+
+<style>
+   
+    header.intro-header {
+        background-image: url('https://lg-7xfeyoec-1257141558.cos.ap-shanghai.myqcloud.com/images/js.jpg');
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    风
+                </span>
+                的博客
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+					
+                    
+                                            
+							
+                        <li>
+                            <a href="/Tags/">标签</a>
+                        </li>
+							
+						
+                    
+                                            
+							
+                        <li>
+                            <a href="/about/">关于我</a>
+                        </li>
+							
+						
+                    
+                                            
+							
+                        <li>
+                            <a href="/categories/">分类</a>
+                        </li>
+							
+						
+                    					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="/js.jpg">
+
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>js</h1>
+                    
+                    <span class="meta">
+                         作者 风
+                        <span>
+                          日期 2019-02-04
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Javascript" title="Javascript">Javascript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            js
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p><strong>《高性能Javascript编程》笔记</strong></p>
+<ol>
+<li>创建一个100行表格，<code>innerHTML VS DOMApi</code><br>当为IE时前者快，当为最新版webkit的引擎，后者快。</li>
+</ol>
+<ol start="2">
+<li><p>js偏函数：通过创建一个名称易懂的独立函数（double，triple），调用是无需每次传入第一个参数，因为第一个数通过bind提供了固定值<br>js柯利化：是把接受多个参数的函数变换成接受一个单一参数最初函数的第一个参数的函数，并且返回接受余下的参数返回结果的新函数的技术；柯里化需要函数有已知的参数数量固定。</p>
+</li>
+<li><p>闭包:阻止垃圾回收将变量从内存中移除的方法，使得在创建变量的执行环境的外面可以访问到该变量</p>
+</li>
+</ol>
+<h2 id="script加载"><a href="#script加载" class="headerlink" title="script加载"></a>script加载</h2><ul>
+<li>为script标签添加<code>defer</code>属性。只适用于IE和Firefox3.5+</li>
+<li>动态创建script元素，用它下载并执行代码<ul>
+<li>IE：<code>onreadystatechange</code></li>
+<li>Others:<code>onload</code></li>
+</ul>
+</li>
+<li>xhr对象下载代码，并注入到页面中</li>
+</ul>
+<h2 id="Date-Access数据访问"><a href="#Date-Access数据访问" class="headerlink" title="Date Access数据访问"></a>Date Access数据访问</h2><ul>
+<li>js中四种基本数据位置:<ul>
+<li>Literal values直接量，Variables变量</li>
+<li>Array items数组项，Object members对象成员</li>
+</ul>
+</li>
+<li>访问速度：<ul>
+<li>直接量，局部量&gt;数组项，对象成员</li>
+</ul>
+</li>
+</ul>
+<p><strong>一个运行期上下文的作用域不会被改变，但是with表达式和try语句可以改变上下文作用于链</strong></p>
+<p><strong>注:一个标识符所处的位置越深，读写速度越慢</strong></p>
+<h2 id="重排-Reflow"><a href="#重排-Reflow" class="headerlink" title="重排(Reflow)"></a>重排(Reflow)</h2><ol>
+<li>添加会删除可见的dom元素</li>
+<li>元素的位置改变</li>
+<li>元素尺寸改变(因编剧，填充功能，边框宽度，高度等属性改变时)</li>
+<li>内容改变(文字改编成图片被另一个不同尺寸的所替代)</li>
+<li>最初的页面渲染</li>
+<li>浏览器窗口改变尺寸</li>
+</ol>
+<ul>
+<li><p>根据改变的性质，渲染树上或大或小的一部分需要重新计算。<br>某些改变可导致重排版整个页面，例如一个滚动条出现时获取局部信息的操作将导致刷新队列动作，这意味着使用了下面的这些方法<code>offsetTop,offsetLeft,offsetWidth,offsetHeight,scrollTop,scrollLeft,scrollWidth,scrollHeight,
+clientTop,clientLeft,clientWidth,clientHeight,getComputedStyle(currentStyle in IE)</code>操作这些属性都将会引起重排</p>
+</li>
+<li><p>减少重排版的方法：</p>
+</li>
+</ul>
+<ul>
+<li>动画<br>  使用绝对左边定位页面动画的元素，使他位于页面布局流之外<br>启动元素动画，当他扩大时，覆盖部分页面，这是一个重回过程，但只影响页面的小部分，避免重排版并重绘一大块页面<br>当动画结束时，重新定位，从而只一次下移文档其他元素的位置</li>
+<li>元素<br>  通过改变<code>display</code>属性，临时从文档上溢出元素然后再恢复它</li>
+<li>创建一个文档片断<br>  它是一个轻量级的<code>domcument</code>对象，可对其实施操作，<code>document.createDocumentFragment()</code>创建要更新节点的副本，在其副本上操作最后覆盖老节点<code>el.cloneNode(true)</code></li>
+</ul>
+<h2 id="算法和流程控制"><a href="#算法和流程控制" class="headerlink" title="算法和流程控制"></a>算法和流程控制</h2><ul>
+<li>基于循环迭代:<code>for,while.do-while,for-in(slow)</code></li>
+<li>基于函数迭代:<code>forEach(slower）</code></li>
+<li>表达式:<code>if-else,switch</code>(可读性好，且快)</li>
+</ul>
+<ul>
+<li>减少迭代次数:Duffs Devices(达夫设备)</li>
+</ul>
+<ul>
+<li>查表法</li>
+</ul>
+<ul>
+<li>当使用查表法是，必须完全消除所有条件判断。操作转换成一个数组项查询或者一个对象成员查询，它的优点是，由于没有条件判断，当后选址数量增加时，很少，甚至没有增加额外的性能开销</li>
+</ul>
+<ul>
+<li>递归</li>
+</ul>
+<ul>
+<li>最大的问题时，一个错误定义，挥着缺少终结条件可导致长时间运行，冻结用户界面，此外，低估函数还会遇到浏览器调用栈大小的限制</li>
+</ul>
+<h2 id="正则表达式的基本处理步骤"><a href="#正则表达式的基本处理步骤" class="headerlink" title="正则表达式的基本处理步骤"></a>正则表达式的基本处理步骤</h2><p>编译，设置起始位置，匹配每个正则表达式的字元，匹配成功或失败</p>
+<h2 id="Web-Workers网页工人线程的运行环境"><a href="#Web-Workers网页工人线程的运行环境" class="headerlink" title="Web Workers网页工人线程的运行环境"></a>Web Workers网页工人线程的运行环境</h2><ul>
+<li>一个浏览器对象只包含四个属性:<code>appName,appVersion,userAgent,platform</code></li>
+<li>一个<code>locations</code>对象和(<code>window</code>中的一样),只是所有属性是只读的</li>
+<li>一个<code>self</code>对象指向全局工人线程对象</li>
+<li>一个<code>importScripts</code>方法，使工人线程可以加载外部Javascript文件</li>
+<li>所有的ECMAScripts对象，如<code>Object,Array,Data..</code></li>
+<li>close方法可立刻停止工人线程。</li>
+</ul>
+<h2 id="灯标-图片传送数据"><a href="#灯标-图片传送数据" class="headerlink" title="灯标(图片传送数据)"></a>灯标(图片传送数据)</h2><p>简单的图像灯标意味着你所能受的限制，不能使用post同jsonp一样，但是它又可通过img的load事件来监听服务端是否接收数据宽度1为成功2为重试</p>
+<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><ul>
+<li>为1:</li>
+</ul>
+<ul>
+<li>&amp; 两个都为1</li>
+<li>| 一个为1</li>
+<li>^  两个只有一个为1</li>
+<li>~  偶0返1<br>实践:偶数&amp;1为0，奇数&amp;1为1</li>
+</ul>
+<h2 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h2><ul>
+<li>延迟加载：在消除函数中重复工作的方法。意味着在信息被使用之前不做前面例子任何工作。</li>
+<li>条件预加载：在脚本运行之前进行检查，而不待函数调用，这样检测只做一次。</li>
+</ul>
+<h2 id="js执行顺序"><a href="#js执行顺序" class="headerlink" title="js执行顺序"></a>js执行顺序</h2><ul>
+<li>声明并初始化函数参数</li>
+<li>声明局部变量，包括将匿名函数赋给一个局部变量，但是并不初始化他们</li>
+<li>声明并初始化函数</li>
+</ul>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><ul>
+<li>for遍历数组或类数组对象</li>
+<li>for-in便利非数组对象</li>
+</ul>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/02/04/wechat/" data-toggle="tooltip" data-placement="top" title="wechat">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/02/04/html5/" data-toggle="tooltip" data-placement="top" title="html5-随笔">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#script加载"><span class="toc-text">script加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Date-Access数据访问"><span class="toc-text">Date Access数据访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重排-Reflow"><span class="toc-text">重排(Reflow)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法和流程控制"><span class="toc-text">算法和流程控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式的基本处理步骤"><span class="toc-text">正则表达式的基本处理步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Workers网页工人线程的运行环境"><span class="toc-text">Web Workers网页工人线程的运行环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#灯标-图片传送数据"><span class="toc-text">灯标(图片传送数据)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#位运算"><span class="toc-text">位运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载"><span class="toc-text">加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js执行顺序"><span class="toc-text">js执行顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-text">循环</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Javascript" title="Javascript">Javascript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/爱杨爱洋1">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/miao-liu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 风 2019
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://lg-7xfeyoec-1257141558.cos.ap-shanghai.myqcloud.com/images/head.jpg">
+</body>
+
+</html>
